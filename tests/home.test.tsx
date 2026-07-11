@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import HomePage from "@/app/page";
 
 describe("landing page pública", () => {
@@ -19,5 +19,19 @@ describe("landing page pública", () => {
         .getAllByRole("link", { name: /falar com a hudi/i })
         .some((link) => link.getAttribute("href") === "#contato"),
     ).toBe(true);
+  });
+
+  it("ativa e restaura a interação do ecossistema conforme o cursor passa pelo hero", () => {
+    render(<HomePage />);
+
+    const hero = screen.getByRole("region", { name: /tecnologia que transforma problemas reais/i });
+    fireEvent.mouseMove(hero, { clientX: 240, clientY: 180 });
+
+    expect(hero).toHaveAttribute("data-pointer-active", "true");
+    expect(hero).toHaveStyle({ "--glow-x": "50%", "--glow-y": "50%" });
+
+    fireEvent.mouseLeave(hero);
+
+    expect(hero).not.toHaveAttribute("data-pointer-active");
   });
 });

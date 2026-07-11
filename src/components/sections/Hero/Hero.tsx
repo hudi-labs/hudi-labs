@@ -1,6 +1,53 @@
+"use client";
+
+import { useState, type CSSProperties, type MouseEvent } from "react";
+
+type PointerPosition = {
+  x: number;
+  y: number;
+};
+
+const restingPointerPosition: PointerPosition = { x: 50, y: 50 };
+
 export function Hero() {
+  const [pointerPosition, setPointerPosition] = useState(restingPointerPosition);
+  const [isPointerActive, setIsPointerActive] = useState(false);
+
+  const handlePointerMove = (event: MouseEvent<HTMLElement>) => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = bounds.width ? ((event.clientX - bounds.left) / bounds.width) * 100 : 50;
+    const y = bounds.height ? ((event.clientY - bounds.top) / bounds.height) * 100 : 50;
+
+    setPointerPosition({
+      x: Math.min(100, Math.max(0, x)),
+      y: Math.min(100, Math.max(0, y)),
+    });
+    setIsPointerActive(true);
+  };
+
+  const resetPointer = () => {
+    setPointerPosition(restingPointerPosition);
+    setIsPointerActive(false);
+  };
+
+  const heroStyle = {
+    "--glow-x": `${pointerPosition.x}%`,
+    "--glow-y": `${pointerPosition.y}%`,
+    "--orbit-x": `${(pointerPosition.x - 50) / 4}px`,
+    "--orbit-y": `${(pointerPosition.y - 50) / 4}px`,
+    "--tilt-x": `${(pointerPosition.y - 50) / -14}deg`,
+    "--tilt-y": `${(pointerPosition.x - 50) / 14}deg`,
+  } as CSSProperties;
+
   return (
-    <section className="hero" aria-labelledby="hero-title">
+    <section
+      className="hero"
+      aria-labelledby="hero-title"
+      data-pointer-active={isPointerActive || undefined}
+      onMouseLeave={resetPointer}
+      onMouseMove={handlePointerMove}
+      style={heroStyle}
+    >
       <div className="hero-glow hero-glow--one" />
       <div className="hero-glow hero-glow--two" />
       <div className="container hero-grid">

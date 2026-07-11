@@ -4,7 +4,7 @@
 
 | Teste | Tipo | Garante |
 | --- | --- | --- |
-| `tests/home.test.tsx` | Integração de UI | A landing renderiza a proposta institucional e os dois CTAs principais apontam para destinos válidos. |
+| `tests/home.test.tsx` | Integração de UI | A landing renderiza a proposta institucional, os CTAs principais e o estado de interação do hero conforme o cursor entra e sai. |
 | `tests/brandbook.test.tsx` | Integração de rota | O Brand Book tem página própria e suas navegações institucionais voltam corretamente à home. |
 | `tests/site-content.test.ts` | Unitário | Produtos e capacidades possuem IDs únicos, CTAs utilizáveis e conteúdo sem duplicidade. |
 | `tests/components.test.tsx` | Integração de componentes | Estados de lançamento, CTAs, capacidades técnicas e navegação de contexto mobile/Brand Book. |
