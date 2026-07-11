@@ -1,0 +1,86 @@
+a:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--hudi-light);
+  outline-offset: 4px;
+}
+
+.mobile-nav {
+  display: none;
+}
+
+.brand-construction__logo {
+  position: absolute;
+  width: 95px;
+  height: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 650px) {
+  .header-nav,
+  .button--header {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: block;
+    position: relative;
+  }
+
+  .mobile-nav summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: var(--hudi-deep);
+    font-size: 0.78rem;
+    font-weight: 800;
+    list-style: none;
+  }
+
+  .mobile-nav summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-nav summary span {
+    display: grid;
+    width: 22px;
+    height: 22px;
+    place-items: center;
+    border: 1px solid #b9d6ff;
+    border-radius: 50%;
+    color: var(--hudi-bright);
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .mobile-nav[open] summary span {
+    transform: rotate(45deg);
+  }
+
+  .mobile-nav__panel {
+    position: absolute;
+    z-index: 5;
+    right: 0;
+    top: calc(100% + 15px);
+    width: 240px;
+    padding: 9px;
+    border: 1px solid #d9e7fa;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 18px 34px rgba(15, 23, 42, 0.16);
+  }
+
+  .mobile-nav__panel li + li {
+    border-top: 1px solid #edf2f7;
+  }
+
+  .mobile-nav__panel a {
+    display: block;
+    padding: 13px 12px;
+    color: var(--hudi-blue);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+}

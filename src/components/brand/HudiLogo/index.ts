@@ -1,0 +1,1 @@
+export { HudiLogo } from "./HudiLogo";
