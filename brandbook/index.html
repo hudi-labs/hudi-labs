@@ -65,41 +65,206 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Print Optimization - Slide Format */
+    /* Print Module - full-bleed slide pages (1 secao = 1 folha inteira) */
     @media print {
-      @page { size: 297mm 210mm; margin: 0; }
-      body { 
-        -webkit-print-color-adjust: exact !important; 
-        print-color-adjust: exact !important; 
+      /* margin 0 remove URL/data/numero de pagina do navegador e usa a folha toda */
+      @page { size: A4 landscape; margin: 0; }
+      html,
+      body {
+        width: 297mm !important;
+        overflow: visible !important;
+      }
+      body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
         margin: 0;
         padding: 0;
         background-color: white;
       }
       .no-print { display: none !important; }
+      .back-to-top { display: none !important; }
       .sidebar { display: none !important; }
-      main { margin-left: 0 !important; width: 297mm !important; }
-      section { 
-        page-break-after: always; 
-        page-break-inside: avoid;
-        width: 297mm !important; 
-        height: 210mm !important; 
+      main {
+        margin-left: 0 !important;
+        width: 297mm !important;
+      }
+
+      /* Cada secao preenche exatamente uma folha A4 paisagem */
+      section {
+        width: 297mm !important;
+        height: 210mm !important;
         min-height: 210mm !important;
         max-height: 210mm !important;
-        margin: 0 !important; 
-        padding: 15mm 20mm !important;
+        margin: 0 !important;
+        padding: 12mm 16mm !important;
         box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
         border: none !important;
         overflow: hidden !important;
+        page-break-after: always;
+        break-after: page;
+        page-break-inside: avoid;
+        break-inside: avoid;
       }
-      
+      section:last-of-type {
+        page-break-after: auto;
+        break-after: auto;
+      }
+
+      /* Capa: marca grande preenchendo a folha */
+      #capa {
+        align-items: center !important;
+        position: relative !important;
+      }
+      #capa > svg.absolute {
+        display: none !important;
+      }
+      #capa > .relative.z-10 {
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+      }
+      #capa .cover-logo-wrap {
+        margin-bottom: 7mm !important;
+        width: 100% !important;
+      }
+      #capa .cover-logo-wrap svg {
+        width: 220mm !important;
+        max-width: 100% !important;
+        height: auto !important;
+      }
+      #capa .flex.items-center.flex-col.mt-8 {
+        margin-top: 0 !important;
+      }
+      #capa h1 {
+        font-size: 32pt !important;
+        margin-bottom: 3mm !important;
+      }
+
+      h1 { font-size: 26pt !important; line-height: 1.15 !important; }
+      h2 { font-size: 18pt !important; line-height: 1.2 !important; }
+      h3 { line-height: 1.2 !important; }
+      p {
+        line-height: 1.35 !important;
+        orphans: 2;
+        widows: 2;
+      }
+      /* Escala segura para titulos gigantes nas paginas de posicionamento */
+      .md\:text-8xl { font-size: 34pt !important; }
+      .md\:text-7xl { font-size: 28pt !important; }
+
+      /* Seam: print card grids with indivisible cards */
+      .print-card-grid {
+        display: grid !important;
+        gap: 4mm !important;
+        align-items: start !important;
+        grid-auto-rows: min-content !important;
+      }
+      .print-card {
+        display: block !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
+      #boas-praticas .print-card-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      }
+      #boas-praticas-erros .print-card-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      }
+      #boas-praticas .print-card .h-40,
+      #boas-praticas-erros .print-card .h-40 {
+        height: 34mm !important;
+      }
+      #boas-praticas-erros .print-card p {
+        font-size: 9.6pt !important;
+        line-height: 1.25 !important;
+      }
+      #boas-praticas-erros .print-card svg {
+        width: 210px !important;
+        height: 42px !important;
+      }
+
+      /* Logotipo: tudo em uma unica folha, sem quebra */
+      #logotipo .mb-12 { margin-bottom: 3mm !important; }
+      #logotipo .mb-16 { margin-bottom: 4mm !important; }
+      #logotipo h2 { font-size: 22pt !important; }
+      #logotipo > .max-w-7xl > p.text-xl {
+        font-size: 10pt !important;
+        line-height: 1.28 !important;
+      }
+      #logotipo .bg-hudi-bg.p-12.md\:p-32 {
+        padding: 8mm !important;
+        margin-bottom: 4mm !important;
+      }
+      #logotipo .bg-hudi-bg.p-12.md\:p-32 svg {
+        width: 105mm !important;
+        height: auto !important;
+      }
+      #logotipo .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 3mm !important;
+      }
+      #logotipo .grid > div {
+        padding: 3.5mm !important;
+        font-size: 8.6pt !important;
+      }
+      #logotipo .grid > div p.font-semibold {
+        font-size: 9pt !important;
+        line-height: 1.2 !important;
+      }
+      #logotipo .grid > div,
+      #cores .grid > div,
+      #tipografia .grid > div,
+      #grafismos .grid > div {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
+
+      /* Cores: barra 60-30-10 + 4 amostras na mesma folha */
+      #cores .mb-16 { margin-bottom: 5mm !important; }
+      #cores .mb-6 { margin-bottom: 3mm !important; }
+      #cores h2 { font-size: 22pt !important; }
+      #cores > .max-w-7xl > p.text-xl {
+        font-size: 10pt !important;
+        line-height: 1.3 !important;
+      }
+      #cores h3.text-2xl { font-size: 14pt !important; }
+      #cores .grid.grid-cols-2.md\:grid-cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        gap: 4mm !important;
+      }
+      #cores .h-32 { height: 16mm !important; }
+      #cores h4 { font-size: 10.5pt !important; }
+      #cores p.font-mono { font-size: 7.8pt !important; line-height: 1.2 !important; }
+      #tipografia .text-\[14rem\] {
+        font-size: 3.4rem !important;
+        line-height: 1 !important;
+        margin-bottom: 2mm !important;
+      }
+      #tipografia .text-6xl { font-size: 1.9rem !important; }
+      #tipografia .text-5xl { font-size: 1.55rem !important; }
+      #tipografia .text-3xl { font-size: 1.25rem !important; }
+      #tipografia .space-y-10 { gap: 3.5mm !important; }
+      #grafismos .h-\[450px\] {
+        height: auto !important;
+        min-height: 170px !important;
+        padding: 5mm !important;
+        overflow: visible !important;
+      }
+      #grafismos p { margin-bottom: 2.5mm !important; }
+      #grafismos .max-w-md { max-width: 100% !important; }
+
+      svg { max-width: 100% !important; height: auto !important; }
+
       /* Force background colors to print */
       .bg-hudi-darker { background-color: #102157 !important; color: white !important; }
       .bg-hudi-dark { background-color: #1E3A8A !important; color: white !important; }
       .bg-hudi-blue { background-color: #3B82F6 !important; color: white !important; }
       .bg-hudi-bg { background-color: #F8FAFC !important; }
+      .bg-white { background-color: #FFFFFF !important; }
       .text-white { color: white !important; }
       .text-hudi-light { color: #60A5FA !important; }
     }
@@ -108,6 +273,19 @@
     .sidebar::-webkit-scrollbar { width: 4px; }
     .sidebar::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
     .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+
+    .back-to-top {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body class="bg-hudi-bg text-slate-800 flex flex-col md:flex-row min-h-screen">
@@ -148,7 +326,8 @@
         <h3 class="text-xs font-bold text-hudi-blue uppercase tracking-widest mb-3">Identidade Visual</h3>
         <ul class="space-y-3">
           <li><a href="#logotipo" class="text-sm text-slate-300 hover:text-white transition-colors">Logotipo</a></li>
-          <li><a href="#boas-praticas" class="text-sm text-slate-300 hover:text-white transition-colors">Boas Práticas</a></li>
+          <li><a href="#boas-praticas" class="text-sm text-slate-300 hover:text-white transition-colors">Usos Corretos</a></li>
+          <li><a href="#boas-praticas-erros" class="text-sm text-slate-300 hover:text-white transition-colors">O que não fazer</a></li>
           <li><a href="#cores" class="text-sm text-slate-300 hover:text-white transition-colors">Cores</a></li>
           <li><a href="#tipografia" class="text-sm text-slate-300 hover:text-white transition-colors">Tipografia</a></li>
           <li><a href="#grafismos" class="text-sm text-slate-300 hover:text-white transition-colors">Grafismos & UI</a></li>
@@ -166,7 +345,7 @@
   <main class="md:ml-64 lg:ml-72 flex-1 w-full flex flex-col">
 
     <!-- 1. Capa -->
-    <section id="capa" class="h-screen bg-hudi-darker text-white flex flex-col justify-center items-center relative overflow-hidden p-8 md:p-24 border-b border-hudi-dark">
+    <section id="capa" class="min-h-screen bg-hudi-darker text-white flex flex-col justify-center items-center relative overflow-hidden p-8 md:p-24 border-b border-hudi-dark">
       <!-- Giant Background Logo (Outline) -->
       <svg class="absolute -right-20 top-0 opacity-[0.03] pointer-events-none h-full" viewBox="0 0 100 100" fill="none" stroke="white" stroke-width="0.5">
         <rect x="20" y="10" width="30" height="80" />
@@ -175,8 +354,8 @@
 
       <div class="relative z-10 flex flex-col items-center justify-center w-full max-w-7xl mx-auto">
         <!-- Giant Logo Centralizado -->
-        <div class="mb-12 scale-125 md:scale-150 origin-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 100" width="450" height="100">
+        <div class="cover-logo-wrap mb-14 w-full flex justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 100" class="w-[560px] md:w-[760px] max-w-full h-auto">
             <defs>
               <linearGradient id="darkGradientCover" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#ffffff" />
@@ -208,7 +387,7 @@
     </section>
 
     <!-- 2. Propósito -->
-    <section id="proposito" class="h-screen bg-hudi-blue text-white flex flex-col justify-center p-8 md:p-24">
+    <section id="proposito" class="min-h-screen bg-hudi-blue text-white flex flex-col justify-center p-8 md:p-24">
       <div class="max-w-7xl w-full mx-auto grid md:grid-cols-12 gap-12 items-start">
         <div class="md:col-span-4">
           <h2 class="text-2xl font-bold mb-4">Propósito</h2>
@@ -226,7 +405,7 @@
     </section>
 
     <!-- 3. Atributos -->
-    <section id="atributos" class="h-screen bg-white flex flex-col justify-center p-8 md:p-24 border-b border-gray-100">
+    <section id="atributos" class="min-h-screen bg-white flex flex-col justify-center p-8 md:p-24 border-b border-gray-100">
       <div class="max-w-7xl w-full mx-auto grid md:grid-cols-12 gap-12 items-center">
         <div class="md:col-span-4">
           <h2 class="text-2xl font-bold text-hudi-dark mb-4">Atributos</h2>
@@ -249,7 +428,7 @@
     </section>
 
     <!-- 4. Qualidades -->
-    <section class="h-screen bg-hudi-bg flex flex-col justify-center p-8 md:p-24 border-b border-gray-200">
+    <section class="min-h-screen bg-hudi-bg flex flex-col justify-center p-8 md:p-24 border-b border-gray-200">
       <div class="max-w-7xl w-full mx-auto grid md:grid-cols-12 gap-12">
         <div class="md:col-span-4">
           <h2 class="text-2xl font-bold text-hudi-dark mb-4">Qualidades</h2>
@@ -264,7 +443,7 @@
     </section>
 
     <!-- 5. Manifesto -->
-    <section id="manifesto" class="h-screen bg-hudi-dark text-white flex flex-col justify-center p-8 md:p-24">
+    <section id="manifesto" class="min-h-screen bg-hudi-dark text-white flex flex-col justify-center p-8 md:p-24">
       <div class="max-w-7xl w-full mx-auto grid md:grid-cols-12 gap-12">
         <div class="md:col-span-4">
           <h2 class="text-2xl font-bold mb-4 text-hudi-light">Manifesto</h2>
@@ -288,15 +467,15 @@
     </section>
 
     <!-- 6. Logotipo -->
-    <section id="logotipo" class="h-screen bg-white flex flex-col justify-center p-8 md:p-24 border-b border-gray-100">
+    <section id="logotipo" class="min-h-screen bg-white flex flex-col justify-center p-8 md:p-24 border-b border-gray-100">
       <div class="max-w-7xl w-full mx-auto">
         <h2 class="text-3xl font-bold text-hudi-dark mb-12">Logotipo</h2>
         <p class="text-xl text-slate-600 mb-16 max-w-4xl leading-relaxed">
           A identidade primária da Hudi Labs que sintetiza a natureza orgânica e a precisão estrutural em um formato arquitetônico sólido. O retângulo escuro representa a base; o quadrado translúcido, a inovação.
         </p>
 
-        <div class="bg-hudi-bg p-12 md:p-32 rounded-3xl flex justify-center items-center mb-12 border border-gray-200">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 100" width="100%" max-width="500" height="100">
+        <div class="bg-hudi-bg p-12 md:p-32 rounded-3xl flex justify-center items-center mb-12 border border-gray-200 text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 100" preserveAspectRatio="xMidYMid meet" class="block mx-auto w-[420px] max-w-full h-auto">
             <defs>
               <linearGradient id="darkGradientMainLogo" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#213E93" />
@@ -306,9 +485,12 @@
                 <stop offset="0%" stop-color="#60A5FA" />
                 <stop offset="100%" stop-color="#3B82F6" />
               </linearGradient>
+              <filter id="shadowMainLogo" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="1" dy="3" stdDeviation="2" flood-color="#0F172A" flood-opacity="0.3" />
+              </filter>
             </defs>
             <rect x="20" y="15" width="28" height="70" fill="url(#darkGradientMainLogo)" />
-            <g filter="url(#shadowCover)">
+            <g filter="url(#shadowMainLogo)">
               <rect x="34" y="33" width="34" height="34" fill="url(#lightGradientMainLogo)" opacity="0.65" />
               <rect x="34" y="33" width="34" height="34" fill="none" stroke="white" stroke-width="1.5" stroke-opacity="0.5" />
             </g>
@@ -316,19 +498,92 @@
             <text x="220" y="68" font-family="Inter" font-weight="400" font-size="46" fill="#64748B">Labs</text>
           </svg>
         </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-slate-600">
+          <div class="bg-white border border-gray-200 rounded-2xl p-6">
+            <p class="text-xs uppercase tracking-wider text-hudi-slate mb-2">Estrutura</p>
+            <p class="font-semibold text-slate-900 mb-2">Base sólida + camada translúcida</p>
+            <p>O retângulo vertical representa estrutura operacional; o quadrado translúcido representa tecnologia e aceleração.</p>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-2xl p-6">
+            <p class="text-xs uppercase tracking-wider text-hudi-slate mb-2">Área de proteção</p>
+            <p class="font-semibold text-slate-900 mb-2">Respiro mínimo recomendado</p>
+            <p>Manter ao menos a largura do símbolo em torno do logotipo para garantir leitura e destaque em qualquer aplicação.</p>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-2xl p-6">
+            <p class="text-xs uppercase tracking-wider text-hudi-slate mb-2">Escala mínima</p>
+            <p class="font-semibold text-slate-900 mb-2">Legibilidade antes de tudo</p>
+            <p>Evitar uso abaixo de 140px de largura no digital para preservar contraste, transparência e reconhecimento da tipografia.</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- 7. Boas Práticas (O que não fazer) -->
-    <section id="boas-praticas" class="h-screen bg-hudi-bg flex flex-col justify-center p-8 md:p-24 border-b border-gray-200">
+    <!-- 7. Boas Práticas (Usos Corretos) -->
+    <section id="boas-praticas" class="min-h-screen bg-hudi-bg flex flex-col justify-center p-8 md:p-24 border-b border-gray-200">
       <div class="max-w-7xl w-full mx-auto">
         <h2 class="text-3xl font-bold text-hudi-dark mb-4">Boas práticas</h2>
-        <p class="text-xl text-slate-600 mb-8">Veja alguns exemplos de usos incorretos que prejudicam a leitura e a integridade da nossa marca.</p>
+        <p class="text-xl text-slate-600 mb-8">Estes usos mantêm leitura, contraste e consistência da identidade em diferentes contextos.</p>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 print-card-grid">
+          <div class="print-card">
+            <div class="bg-white border border-gray-200 rounded-xl p-6 h-40 flex justify-center items-center mb-3">
+              <svg viewBox="0 0 450 100" width="250" height="50">
+                <rect x="20" y="15" width="28" height="70" fill="#1E3A8A" />
+                <rect x="34" y="33" width="34" height="34" fill="#3B82F6" opacity="0.65" />
+                <text x="85" y="68" font-family="Inter" font-weight="600" font-size="46" fill="#1E3A8A">HUDI</text>
+                <text x="220" y="68" font-family="Inter" font-weight="400" font-size="46" fill="#64748B">Labs</text>
+              </svg>
+            </div>
+            <p class="text-sm text-emerald-700 flex items-start font-medium">
+              <span class="mr-2 border border-emerald-600 rounded-full w-4 h-4 flex items-center justify-center text-[10px] shrink-0 mt-0.5">✓</span>
+              Aplicação principal em fundo claro com contraste adequado.
+            </p>
+          </div>
+
+          <div class="print-card">
+            <div class="bg-hudi-darker border border-gray-200 rounded-xl p-6 h-40 flex justify-center items-center mb-3">
+              <svg viewBox="0 0 450 100" width="250" height="50">
+                <rect x="20" y="15" width="28" height="70" fill="#ffffff" />
+                <rect x="34" y="33" width="34" height="34" fill="#60A5FA" opacity="0.75" />
+                <text x="85" y="68" font-family="Inter" font-weight="600" font-size="46" fill="#ffffff">HUDI</text>
+                <text x="220" y="68" font-family="Inter" font-weight="400" font-size="46" fill="#CBD5E1">Labs</text>
+              </svg>
+            </div>
+            <p class="text-sm text-emerald-700 flex items-start font-medium">
+              <span class="mr-2 border border-emerald-600 rounded-full w-4 h-4 flex items-center justify-center text-[10px] shrink-0 mt-0.5">✓</span>
+              Versão para fundo escuro com cores adaptadas.
+            </p>
+          </div>
+
+          <div class="print-card">
+            <div class="bg-white border border-gray-200 rounded-xl p-6 h-40 flex justify-center items-center mb-3">
+              <svg viewBox="0 0 450 100" width="250" height="50">
+                <rect x="20" y="15" width="28" height="70" fill="#1E293B" />
+                <rect x="34" y="33" width="34" height="34" fill="#1E293B" opacity="0.35" />
+                <text x="85" y="68" font-family="Inter" font-weight="600" font-size="46" fill="#1E293B">HUDI</text>
+                <text x="220" y="68" font-family="Inter" font-weight="400" font-size="46" fill="#334155">Labs</text>
+              </svg>
+            </div>
+            <p class="text-sm text-emerald-700 flex items-start font-medium">
+              <span class="mr-2 border border-emerald-600 rounded-full w-4 h-4 flex items-center justify-center text-[10px] shrink-0 mt-0.5">✓</span>
+              Variação monocromática para aplicações institucionais.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Boas Práticas (O que não fazer) -->
+    <section id="boas-praticas-erros" class="min-h-screen bg-white flex flex-col justify-center p-8 md:p-24 border-b border-gray-200">
+      <div class="max-w-7xl w-full mx-auto">
+        <h2 class="text-3xl font-bold text-hudi-dark mb-4">O que não fazer</h2>
+        <p class="text-xl text-slate-600 mb-8">Veja alguns usos incorretos que prejudicam leitura, consistência e percepção da marca.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 print-card-grid">
           
           <!-- Card 1: Cores Erradas -->
-          <div>
+          <div class="print-card">
             <div class="bg-white border border-gray-200 rounded-xl p-6 h-40 flex justify-center items-center mb-3">
               <svg viewBox="0 0 450 100" width="250" height="50">
                 <rect x="20" y="15" width="28" height="70" fill="#EF4444" />
@@ -344,7 +599,7 @@
           </div>
 
           <!-- Card 2: Formas Arredondadas -->
-          <div>
+          <div class="print-card">
             <div class="bg-white border border-gray-200 rounded-xl p-6 h-40 flex justify-center items-center mb-3">
               <svg viewBox="0 0 450 100" width="250" height="50">
                 <rect x="20" y="15" width="28" height="70" rx="10" fill="#1E3A8A" />
@@ -360,7 +615,7 @@
           </div>
 
           <!-- Card 3: Tipografia Alterada -->
-          <div>
+          <div class="print-card">
             <div class="bg-white border border-gray-200 rounded-xl p-6 h-40 flex justify-center items-center mb-3">
               <svg viewBox="0 0 450 100" width="250" height="50">
                 <rect x="20" y="15" width="28" height="70" fill="#1E3A8A" />
@@ -376,7 +631,7 @@
           </div>
 
           <!-- Card 4: Sem transparência -->
-          <div>
+          <div class="print-card">
             <div class="bg-white border border-gray-200 rounded-xl p-6 h-40 flex justify-center items-center mb-3">
               <svg viewBox="0 0 450 100" width="250" height="50">
                 <rect x="20" y="15" width="28" height="70" fill="#1E3A8A" />
@@ -392,7 +647,7 @@
           </div>
 
           <!-- Card 5: Sombra Excessiva -->
-          <div>
+          <div class="print-card">
             <div class="bg-white border border-gray-200 rounded-xl p-6 h-40 flex justify-center items-center mb-3">
               <svg viewBox="0 0 450 100" width="250" height="50" style="filter: drop-shadow(6px 6px 8px rgba(0,0,0,0.4))">
                 <rect x="20" y="15" width="28" height="70" fill="#1E3A8A" />
@@ -408,13 +663,13 @@
           </div>
 
           <!-- Card 6: Fundo com Baixo Contraste -->
-          <div>
+          <div class="print-card">
             <div class="bg-hudi-darker border border-gray-200 rounded-xl p-6 h-40 flex justify-center items-center mb-3">
               <svg viewBox="0 0 450 100" width="250" height="50">
-                <rect x="20" y="15" width="28" height="70" fill="#1E3A8A" />
-                <rect x="34" y="33" width="34" height="34" fill="#3B82F6" opacity="0.65" />
+                <rect x="20" y="15" width="28" height="70" fill="#102157" />
+                <rect x="34" y="33" width="34" height="34" fill="#1E3A8A" opacity="0.85" />
                 <text x="85" y="68" font-family="Inter" font-weight="600" font-size="46" fill="#1E3A8A">HUDI</text>
-                <text x="220" y="68" font-family="Inter" font-weight="400" font-size="46" fill="#64748B">Labs</text>
+                <text x="220" y="68" font-family="Inter" font-weight="400" font-size="46" fill="#475569">Labs</text>
               </svg>
             </div>
             <p class="text-sm text-red-600 flex items-start font-medium">
@@ -427,8 +682,8 @@
       </div>
     </section>
 
-    <!-- 8. Cores -->
-    <section id="cores" class="h-screen bg-white flex flex-col justify-center p-8 md:p-24 border-b border-gray-100">
+    <!-- 9. Cores -->
+    <section id="cores" class="min-h-screen bg-white flex flex-col justify-center p-8 md:p-24 border-b border-gray-100">
       <div class="max-w-7xl w-full mx-auto">
         <h2 class="text-3xl font-bold text-hudi-dark mb-4">Cores</h2>
         <p class="text-xl text-slate-600 mb-16 max-w-4xl leading-relaxed">A paleta cromática de Hudi Labs é o nosso principal ponto de contato visual. Ela é impactante e ajuda a expressar nosso foco na conversão e tecnologia.</p>
@@ -477,8 +732,8 @@
       </div>
     </section>
 
-    <!-- 9. Tipografia -->
-    <section id="tipografia" class="h-screen bg-hudi-dark text-white flex flex-col justify-center p-8 md:p-24 border-b border-hudi-darker">
+    <!-- 10. Tipografia -->
+    <section id="tipografia" class="min-h-screen bg-hudi-dark text-white flex flex-col justify-center p-8 md:p-24 border-b border-hudi-darker">
       <div class="max-w-7xl w-full mx-auto">
         <h2 class="text-3xl font-bold text-hudi-light mb-4">Tipografia</h2>
         <p class="text-xl text-blue-200 mb-12 max-w-4xl leading-relaxed">A tipografia ajuda a expressar nossa personalidade. Utilizamos uma fonte geométrica desenhada para extrema clareza e assepsia no ambiente digital.</p>
@@ -510,8 +765,8 @@
       </div>
     </section>
 
-    <!-- 10. Grafismos / Glassmorphism -->
-    <section id="grafismos" class="h-screen bg-hudi-bg flex flex-col justify-center p-8 md:p-24">
+    <!-- 11. Grafismos / Glassmorphism -->
+    <section id="grafismos" class="min-h-screen bg-hudi-bg flex flex-col justify-center p-8 md:p-24">
       <div class="max-w-7xl w-full mx-auto grid md:grid-cols-2 gap-20 items-center">
         <div>
           <h2 class="text-3xl font-bold text-hudi-dark mb-8">Grafismos e UI</h2>
@@ -540,18 +795,50 @@
     </section>
 
   </main>
-</div>
+
+  <button id="backToTop" class="back-to-top no-print fixed bottom-6 right-6 md:bottom-8 md:right-8 bg-hudi-blue text-white w-12 h-12 rounded-full shadow-lg hover:bg-blue-600 transition-colors flex items-center justify-center z-50" aria-label="Voltar ao topo" title="Voltar ao topo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M8 12a.5.5 0 0 1-.5-.5V4.707L4.354 7.854a.5.5 0 1 1-.708-.708l4-4a.5.5 0 0 1 .708 0l4 4a.5.5 0 0 1-.708.708L8.5 4.707V11.5A.5.5 0 0 1 8 12z"/>
+    </svg>
+  </button>
 
 <script>
   // Add smooth scrolling to sidebar links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
-      });
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth'
+        });
+      }
     });
   });
+
+  const backToTopButton = document.getElementById('backToTop');
+
+  function toggleBackToTop() {
+    if (!backToTopButton) return;
+    if (window.scrollY > 420) {
+      backToTopButton.classList.add('visible');
+    } else {
+      backToTopButton.classList.remove('visible');
+    }
+  }
+
+  window.addEventListener('scroll', toggleBackToTop);
+
+  if (backToTopButton) {
+    backToTopButton.addEventListener('click', () => {
+      const home = document.getElementById('capa');
+      if (home) {
+        home.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  toggleBackToTop();
 </script>
 </body>
 </html>
