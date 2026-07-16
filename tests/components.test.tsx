@@ -18,7 +18,10 @@ describe("componentes principais", () => {
     render(<ProductShowcase product={products[0]} />);
 
     expect(screen.queryByText("Em construção")).not.toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /conhecer hudi deliveries/i })).toHaveAttribute("href", "#contato");
+    expect(screen.getByRole("link", { name: /conheça a hudi delivery/i })).toHaveAttribute(
+      "href",
+      "https://delivery.hudi.inspira.dev.br",
+    );
   });
 
   it("renderiza todas as capacidades técnicas públicas", () => {

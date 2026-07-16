@@ -1,4 +1,5 @@
 import type { Product } from "@/types/site";
+import { DeliveryInterface } from "./DeliveryInterface";
 
 type ProductShowcaseProps = {
   product: Product;
@@ -7,21 +8,7 @@ type ProductShowcaseProps = {
 
 function ProductInterface({ product }: { product: Product }) {
   if (product.id === "deliveries") {
-    return (
-      <div className="product-interface product-interface--deliveries" aria-hidden="true">
-        <div className="ui-window-bar"><i /><i /><i /></div>
-        <div className="delivery-ui-body">
-          <div className="delivery-ui-sidebar"><span>HD</span><b /><b /><b /></div>
-          <div className="delivery-ui-content">
-            <div className="ui-title-row"><span>Pedidos</span><em>+12%</em></div>
-            <div className="ui-stat-row"><strong>32</strong><small>pedidos hoje</small></div>
-            <div className="ui-order"><span>Joana M.</span><strong>R$ 58,90</strong></div>
-            <div className="ui-order"><span>Marcos A.</span><strong>R$ 72,40</strong></div>
-            <div className="ui-order ui-order--highlight"><span>Novo pedido</span><strong>•</strong></div>
-          </div>
-        </div>
-      </div>
-    );
+    return <DeliveryInterface />;
   }
 
   if (product.id === "esporte") {
@@ -62,7 +49,7 @@ export function ProductShowcase({ product, reversed = false }: ProductShowcasePr
           <ul className="product-highlights">
             {product.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
           </ul>
-          <a className="text-link" href={product.ctaHref}>
+          <a className={product.id === "deliveries" ? "delivery-cta" : "text-link"} href={product.ctaHref}>
             {product.ctaLabel} <span aria-hidden="true">→</span>
           </a>
           {product.status === "coming-soon" && <span className="status-label">Em construção</span>}

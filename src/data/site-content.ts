@@ -16,8 +16,8 @@ export const products: Product[] = [
     description:
       "Uma plataforma de gestão e automação para operações de delivery que precisam vender com clareza e operar com ritmo.",
     highlights: ["Gestão de pedidos", "Operação organizada", "Experiência de compra"],
-    ctaLabel: "Conhecer Hudi Deliveries",
-    ctaHref: "#contato",
+    ctaLabel: "Conheça a Hudi Delivery",
+    ctaHref: "https://delivery.hudi.inspira.dev.br",
     status: "available",
   },
   {

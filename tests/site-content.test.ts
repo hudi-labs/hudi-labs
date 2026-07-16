@@ -11,4 +11,8 @@ describe("contrato de conteúdo público", () => {
     expect(capabilities).toHaveLength(6);
     expect(new Set(capabilities.map((capability) => capability.name)).size).toBe(capabilities.length);
   });
+
+  it("leva o CTA de delivery para o produto publicado", () => {
+    expect(products[0].ctaHref).toBe("https://delivery.hudi.inspira.dev.br");
+  });
 });

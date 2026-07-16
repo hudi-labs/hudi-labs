@@ -17,7 +17,7 @@ describe("landing page pública", () => {
     expect(
       screen
         .getAllByRole("link", { name: /falar com a hudi/i })
-        .some((link) => link.getAttribute("href") === "#contato"),
+        .some((link) => link.getAttribute("href")?.startsWith("https://wa.me/553131890669?text=")),
     ).toBe(true);
   });
 
