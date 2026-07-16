@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import type { CSSProperties } from "react";
+import { useCyclingDemo } from "@/components/motion/useCyclingDemo";
 
 const incomingOrders = [
   { customer: "Ana C.", value: "R$ 46,20" },
@@ -9,21 +10,13 @@ const incomingOrders = [
 ] as const;
 
 export function DeliveryInterface() {
-  const [cycle, setCycle] = useState(0);
-
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      setCycle((current) => current + 1);
-    }, 2400);
-
-    return () => window.clearInterval(interval);
-  }, []);
+  const { index: cycle, pause, resume } = useCyclingDemo({ length: incomingOrders.length, intervalMs: 2400 });
 
   const order = incomingOrders[cycle % incomingOrders.length];
   const orderCount = 32 + (cycle % 8);
 
   return (
-    <div className="product-interface product-interface--deliveries" aria-hidden="true">
+    <div className="product-interface product-interface--deliveries" aria-hidden="true" onMouseEnter={pause} onMouseLeave={resume}>
       <div className="ui-window-bar"><i /><i /><i /></div>
       <div className="delivery-ui-body">
         <div className="delivery-ui-sidebar"><span>HD</span><b /><b /><b /></div>

@@ -1,5 +1,8 @@
+import Link from "next/link";
 import type { Product } from "@/types/site";
 import { DeliveryInterface } from "./DeliveryInterface";
+import { PagesInterface } from "./PagesInterface";
+import { SportInterface } from "./SportInterface";
 
 type ProductShowcaseProps = {
   product: Product;
@@ -12,23 +15,11 @@ function ProductInterface({ product }: { product: Product }) {
   }
 
   if (product.id === "esporte") {
-    return (
-      <div className="product-interface product-interface--esporte" aria-hidden="true">
-        <div className="sport-ui-header"><span>meu esporte</span><b>⌁</b></div>
-        <div className="sport-hero-card"><small>HOJE • 20H</small><strong>Fut7 da quinta</strong><span>4 vagas disponíveis</span></div>
-        <div className="sport-ui-list"><span>Próximas partidas</span><div><i /> Arena Norte <b>+3</b></div><div><i /> Clube da Vila <b>+1</b></div></div>
-      </div>
-    );
+    return <SportInterface />;
   }
 
   if (product.id === "pages") {
-    return (
-      <div className="product-interface product-interface--pages" aria-hidden="true">
-        <div className="pages-toolbar"><span>hudi pages</span><b>Publicar</b></div>
-        <div className="pages-canvas"><small>NOVA CAMPANHA</small><strong>Sua ideia merece<br />uma página clara.</strong><span className="mock-button">Começar agora</span></div>
-        <div className="pages-layers"><span>Hero</span><span>Benefícios</span><span>CTA</span></div>
-      </div>
-    );
+    return <PagesInterface />;
   }
 
   const unsupportedProduct: never = product.id;
@@ -49,10 +40,11 @@ export function ProductShowcase({ product, reversed = false }: ProductShowcasePr
           <ul className="product-highlights">
             {product.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
           </ul>
-          <a className={product.id === "deliveries" ? "delivery-cta" : "text-link"} href={product.ctaHref}>
-            {product.ctaLabel} <span aria-hidden="true">→</span>
-          </a>
-          {product.status === "coming-soon" && <span className="status-label">Em construção</span>}
+          <Link className="product-cta" data-product={product.id} href={product.ctaHref}>
+            <span>{product.ctaLabel}</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </Link>
+          {product.status === "coming-soon" && <span className="status-label">Em construção · {product.launchLabel}</span>}
         </div>
         <div className="product-art">
           <div className="product-art__backdrop" />
