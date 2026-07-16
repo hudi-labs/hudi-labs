@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, type CSSProperties, type MouseEvent } from "react";
 
 type PointerPosition = {
@@ -8,6 +9,14 @@ type PointerPosition = {
 };
 
 const restingPointerPosition: PointerPosition = { x: 50, y: 50 };
+
+const kineticFragments = [
+  [7, 18, 8, -18, 0], [18, 72, 5, 28, -3], [29, 12, 6, 42, -6],
+  [42, 82, 9, -32, -1], [54, 20, 5, 18, -5], [66, 67, 7, -12, -2],
+  [76, 10, 9, 35, -4], [87, 46, 5, -28, -7], [94, 78, 7, 22, -1],
+  [11, 46, 4, 12, -8], [36, 55, 6, -40, -3], [59, 91, 4, 30, -6],
+  [72, 35, 5, -16, -8], [91, 21, 4, 40, -4],
+] as const;
 
 export function Hero() {
   const [pointerPosition, setPointerPosition] = useState(restingPointerPosition);
@@ -50,17 +59,30 @@ export function Hero() {
     >
       <div className="hero-glow hero-glow--one" />
       <div className="hero-glow hero-glow--two" />
+      <div className="hero-fragments" aria-hidden="true">
+        {kineticFragments.map(([x, y, size, rotation, delay], index) => (
+          <i
+            key={`${x}-${y}`}
+            style={{
+              "--fragment-x": `${x}%`,
+              "--fragment-y": `${y}%`,
+              "--fragment-size": `${size}px`,
+              "--fragment-rotation": `${rotation}deg`,
+              "--fragment-delay": `${delay}s`,
+              "--fragment-drift": `${index % 2 === 0 ? 18 : -15}px`,
+            } as CSSProperties}
+          />
+        ))}
+      </div>
       <div className="container hero-grid">
         <div className="hero-copy">
           <p className="eyebrow eyebrow--light">Hub de tecnologia e produtos digitais</p>
-          <h1 id="hero-title">Tecnologia que transforma problemas reais em produtos que escalam.</h1>
+          <h1 id="hero-title">Um laboratório. Vários produtos em movimento.</h1>
           <p className="hero-description">
-            A Hudi Labs é um laboratório de inovação. Criamos soluções digitais claras, robustas e conectadas para negócios, comunidades e pessoas.
+            A Hudi Labs transforma problemas reais em produtos independentes, conectando estratégia, engenharia e experiências que as pessoas querem usar.
           </p>
           <div className="button-group">
-            <a className="button button--primary" href="#ecossistema">
-              Conhecer o ecossistema
-            </a>
+            <Link className="button button--primary" href="/produtos/">Explorar produtos</Link>
             <a className="button button--ghost" href="#contato">
               Falar com a Hudi <span aria-hidden="true">↗</span>
             </a>
@@ -72,28 +94,20 @@ export function Hero() {
           </ul>
         </div>
 
-        <div className="hero-stage" aria-label="Representação do ecossistema Hudi Labs">
-          <div className="orbit orbit--outer" />
-          <div className="orbit orbit--inner" />
-          <div className="hero-core">
-            <span className="core-symbol" aria-hidden="true" />
+        <div className="hero-stage" aria-label="Hudi Labs, Hudi Delivery, Hudi Esporte e Hudi Pages">
+          <div className="kinetic-wordmark">
+            <span className="kinetic-mark" aria-hidden="true"><i /></span>
             <strong>HUDI</strong>
-            <span>LABS</span>
-          </div>
-          <div className="orbit-card orbit-card--deliveries">
-            <span className="orbit-card__number">01</span>
-            <strong>Deliveries</strong>
-            <small>Operação que flui</small>
-          </div>
-          <div className="orbit-card orbit-card--esporte">
-            <span className="orbit-card__number">02</span>
-            <strong>Esporte</strong>
-            <small>Comunidade em movimento</small>
-          </div>
-          <div className="orbit-card orbit-card--pages">
-            <span className="orbit-card__number">03</span>
-            <strong>Pages</strong>
-            <small>Ideias que convertem</small>
+            <div className="kinetic-wheel" aria-hidden="true">
+              <div className="kinetic-wheel__track">
+                <span>LABS</span>
+                <span>DELIVERY</span>
+                <span>ESPORTE</span>
+                <span>PAGES</span>
+                <span>LABS</span>
+              </div>
+            </div>
+            <small>ideias úteis, produtos que escalam</small>
           </div>
         </div>
       </div>

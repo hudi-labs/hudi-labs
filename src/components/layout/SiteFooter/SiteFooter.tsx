@@ -41,7 +41,13 @@ export function SiteFooter({ currentPage = "home" }: SiteFooterProps) {
       </div>
       <div className="container footer-bottom">
         <span>© {new Date().getFullYear()} Hudi Labs. Todos os direitos reservados.</span>
-        <Link href="/brandbook/">Brand Book</Link>
+        <Link className="brandbook-link" href="/brandbook/" aria-label="Abrir Brand Book da Hudi Labs">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M4.5 5.5A2.5 2.5 0 0 1 7 3h11.5v15H7a2.5 2.5 0 0 0-2.5 2.5z" />
+            <path d="M4.5 5.5v15A2.5 2.5 0 0 1 7 18" />
+            <path d="M12 8h4m0 0v4m0-4-5 5" />
+          </svg>
+        </Link>
       </div>
     </footer>
   );

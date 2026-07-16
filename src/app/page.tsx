@@ -2,9 +2,9 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { Hero } from "@/components/sections/Hero";
+import { IntegrationTeaser } from "@/components/sections/IntegrationTeaser";
 import { Manifesto } from "@/components/sections/Manifesto";
 import { ProductShowcase } from "@/components/sections/ProductShowcase";
-import { TechnologyGrid } from "@/components/sections/TechnologyGrid";
 import { products } from "@/data/site-content";
 
 export default function HomePage() {
@@ -33,7 +33,7 @@ export default function HomePage() {
             <ProductShowcase key={product.id} product={product} reversed={index % 2 === 1} />
           ))}
         </section>
-        <TechnologyGrid />
+        <IntegrationTeaser />
         <FinalCta />
       </main>
       <SiteFooter />

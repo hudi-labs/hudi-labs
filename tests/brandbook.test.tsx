@@ -9,15 +9,8 @@ describe("Brand Book", () => {
       screen.getByRole("heading", { name: /uma identidade para ideias que viram produtos/i }),
     ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /ir para a página inicial/i })).toHaveAttribute("href", "/");
-    expect(
-      screen
-        .getAllByRole("link", { name: "Ecossistema" })
-        .every((link) => link.getAttribute("href") === "/#ecossistema"),
-    ).toBe(true);
-    expect(
-      screen
-        .getAllByRole("link", { name: /^brand book$/i })
-        .some((link) => link.getAttribute("href") === "/brandbook"),
-    ).toBe(true);
+    expect(screen.getAllByRole("link", { name: "Quem somos" }).every((link) => link.getAttribute("href") === "/#quem-somos")).toBe(true);
+    expect(screen.getByRole("link", { name: /abrir brand book da hudi labs/i })).toHaveAttribute("href", "/brandbook");
+    expect(screen.queryByRole("link", { name: /^brand book$/i })).not.toBeInTheDocument();
   });
 });

@@ -1,3 +1,21 @@
+@keyframes fragment-drift {
+  0% { translate: 0 0; opacity: .18; }
+  45% { opacity: .55; }
+  100% { translate: var(--fragment-drift) -16px; opacity: .28; }
+}
+
+@keyframes hero-reveal {
+  from { opacity: 0; translate: 0 22px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+.hero-copy > * { animation: hero-reveal .8s cubic-bezier(.2,.75,.2,1) both; }
+.hero-copy > :nth-child(2) { animation-delay: .08s; }
+.hero-copy > :nth-child(3) { animation-delay: .16s; }
+.hero-copy > :nth-child(4) { animation-delay: .24s; }
+.hero-copy > :nth-child(5) { animation-delay: .32s; }
+.kinetic-wordmark { animation: hero-reveal .9s cubic-bezier(.2,.75,.2,1) .18s both; }
+
 @media (hover: hover) and (pointer: fine) and (min-width: 651px) {
   .hero {
     perspective: 1000px;
@@ -63,6 +81,20 @@
   .color-card:hover {
     transform: translateY(-6px);
   }
+
+  .catalog-card {
+    transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 260ms ease;
+  }
+
+  .catalog-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 28px 70px rgba(30,58,138,.14);
+  }
+}
+
+.product-showcase:focus-within .product-interface *,
+.product-interface:hover * {
+  animation-play-state: paused !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

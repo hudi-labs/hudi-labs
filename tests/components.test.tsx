@@ -10,8 +10,8 @@ describe("componentes principais", () => {
     render(<ProductShowcase product={products[1]} reversed />);
 
     expect(screen.getByRole("heading", { name: /aproximar jogadores/i })).toBeInTheDocument();
-    expect(screen.getByText("Em construção")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /acompanhar o lançamento/i })).toHaveAttribute("href", "#contato");
+    expect(screen.getByText(/Em construção · Outubro de 2026/i)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /acompanhar o lançamento/i })).toHaveAttribute("href", "/lancamentos");
   });
 
   it("não rotula como em construção um produto disponível", () => {
@@ -37,11 +37,12 @@ describe("componentes principais", () => {
 
     fireEvent.click(screen.getByLabelText("Abrir navegação"));
     const mobileNavigation = screen.getByRole("navigation", { name: "Navegação mobile" });
-    expect(within(mobileNavigation).getByRole("link", { name: "Ecossistema" })).toHaveAttribute(
+    expect(within(mobileNavigation).getByRole("link", { name: "Quem somos" })).toHaveAttribute(
       "href",
-      "/#ecossistema",
+      "/#quem-somos",
     );
-    expect(resolveNavigationHref("brandbook", "#tecnologia")).toBe("/#tecnologia");
+    expect(within(mobileNavigation).queryByRole("link", { name: /brand book/i })).not.toBeInTheDocument();
+    expect(resolveNavigationHref("brandbook", "#quem-somos")).toBe("/#quem-somos");
     expect(resolveNavigationHref("home", "#tecnologia")).toBe("#tecnologia");
   });
 });

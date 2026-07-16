@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { HudiLogo } from "@/components/brand/HudiLogo";
-import { navigationItems } from "@/data/site-content";
+import { contact, navigationItems } from "@/data/site-content";
 import { resolveNavigationHref, type SitePage } from "@/lib/navigation";
 
 type SiteHeaderProps = {
@@ -20,7 +20,7 @@ export function SiteHeader({ currentPage = "home" }: SiteHeaderProps) {
               <li key={item.href}>
                 <Link
                   href={resolveNavigationHref(currentPage, item.href)}
-                  aria-current={currentPage === "brandbook" && item.href === "/brandbook/" ? "page" : undefined}
+                  aria-current={item.href.startsWith("/") && currentPage === item.page ? "page" : undefined}
                 >
                   {item.label}
                 </Link>
@@ -37,11 +37,11 @@ export function SiteHeader({ currentPage = "home" }: SiteHeaderProps) {
                   <Link href={resolveNavigationHref(currentPage, item.href)}>{item.label}</Link>
                 </li>
               ))}
-              <li><a href="#contato">Falar com a Hudi</a></li>
+              <li><a href={contact.whatsapp} rel="noreferrer" target="_blank">Falar com a Hudi</a></li>
             </ul>
           </nav>
         </details>
-        <a className="button button--header" href="#contato">
+        <a className="button button--header" href={contact.whatsapp} rel="noreferrer" target="_blank">
           Falar com a Hudi
         </a>
       </div>
