@@ -1,6 +1,6 @@
 import { createHmac } from "node:crypto";
 import { hermesBus, type HermesBusEvent } from "@/lib/event-bus";
-import { GET, POST } from "@/app/api/webhook/whatsapp/route";
+import { GET, POST } from "@/lib/api/webhook/whatsapp/route";
 
 // Provide minimal stubs so the route module loads in a non-Next.js test env
 vi.mock("next/server", () => {
