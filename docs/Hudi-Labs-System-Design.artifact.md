@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Document the static marketing system after the ecosystem refactor: routes, content model, interactive modules, accessibility, export constraints, validation and rollout decisions.
+Document the static marketing system after the cleanup of discontinued subprojects: routes, content model, interactive modules, accessibility, export constraints, validation and rollout decisions.
 
 ## Audience
 
@@ -11,9 +11,9 @@ Hudi Labs product, design and engineering collaborators, plus future maintainers
 ## System boundary
 
 - Next.js static site with `basePath` and `trailingSlash` support.
-- Public routes: Home, Products, Integrations, Launches and Brand Book.
-- Centralized product/navigation content; no backend, database or simulated API documentation.
-- Client-side motion only for progressive presentation and illustrative product demos.
+- Public routes: Home, Products, Integrations and Brand Book.
+- Centralized product and navigation content for Hudi Labs and its active public offering.
+- Client-side motion only for progressive presentation; no backend, database or simulated API documentation.
 
 ## Core flow
 
@@ -24,8 +24,8 @@ Visitor → route shell → centralized content → semantic page composition �
 - Stable internal product IDs and canonical public names.
 - Brand Book discoverable only in the footer while remaining publicly addressable.
 - Motion pauses on interaction and simplifies with `prefers-reduced-motion`.
-- Navigation, WhatsApp destinations, launch dates and export output are covered by automated checks.
+- Navigation, product destinations and export output are covered by automated checks.
 
 ## Decision
 
-Evolve the existing Hudi visual system and deepen modules without introducing a new motion dependency, backend or ChatGPT App manifest.
+Keep the Hudi Labs public site focused on the brand, the active product catalog and institutional integration capabilities, without retaining discontinued subproject routes or demos.

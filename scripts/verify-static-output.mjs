@@ -9,15 +9,11 @@ const requiredPages = [
   },
   {
     file: "out/produtos/index.html",
-    content: ["Produtos independentes", "Hudi Delivery", "Hudi Esporte", "Hudi Pages"],
+    content: ["Produtos claros, úteis e prontos para escalar.", "Hudi Delivery", "Disponível"],
   },
   {
     file: "out/integracoes/index.html",
     content: ["Tecnologia que conecta", "APIs REST", "Sem endpoints fictícios"],
-  },
-  {
-    file: "out/lancamentos/index.html",
-    content: ["Novas experiências entrando em campo", "Outubro de 2026", "Quero acompanhar"],
   },
   {
     file: "out/brandbook/index.html",
@@ -52,4 +48,4 @@ if (home.includes(">Brand Book<")) {
   throw new Error("The landing page exposes Brand Book as a visible navigation label.");
 }
 
-console.log("Static export verified: Home, Produtos, Integrações, Lançamentos and Brand Book are present and portable.");
+console.log("Static export verified: Home, Produtos, Integrações and Brand Book are present and portable.");

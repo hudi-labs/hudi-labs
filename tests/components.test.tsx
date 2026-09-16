@@ -6,22 +6,15 @@ import { capabilities, products } from "@/data/site-content";
 import { resolveNavigationHref } from "@/lib/navigation";
 
 describe("componentes principais", () => {
-  it("mostra o status e CTA corretos para um produto em lançamento", () => {
-    render(<ProductShowcase product={products[1]} reversed />);
+  it("mostra o CTA correto para o produto público disponível", () => {
+    render(<ProductShowcase product={products[0]} reversed />);
 
-    expect(screen.getByRole("heading", { name: /aproximar jogadores/i })).toBeInTheDocument();
-    expect(screen.getByText(/Em construção · Outubro de 2026/i)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /acompanhar o lançamento/i })).toHaveAttribute("href", "/lancamentos");
-  });
-
-  it("não rotula como em construção um produto disponível", () => {
-    render(<ProductShowcase product={products[0]} />);
-
-    expect(screen.queryByText("Em construção")).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /mais controle para quem vende/i })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /conheça a hudi delivery/i })).toHaveAttribute(
       "href",
       "https://delivery.hudi.inspira.dev.br",
     );
+    expect(screen.queryByText(/em construção/i)).not.toBeInTheDocument();
   });
 
   it("renderiza todas as capacidades técnicas públicas", () => {

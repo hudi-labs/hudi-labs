@@ -95,7 +95,7 @@ Um teste de carga simples (50 clientes SSE simultâneos enviando 1 evento/s cada
   Mitigação: carregar estado inicial via REST antes de abrir o SSE.
 - Em escala horizontal (múltiplos pods), o bus deve ser externalizado (Redis, Kafka).
 - WebTransport deve ser reavaliado quando o suporte de browsers for universal e o projeto
-  migrar para cenários de telemetria de alta frequência (ex: Hudi Esporte).
+  migrar para cenários de telemetria de alta frequência.
 
 ---
 
