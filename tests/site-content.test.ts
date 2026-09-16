@@ -1,12 +1,11 @@
 import { capabilities, products } from "@/data/site-content";
 
 describe("contrato de conteúdo público", () => {
-  it("mantém os três produtos com identificadores e CTAs utilizáveis", () => {
-    expect(products.map((product) => product.id)).toEqual(["deliveries", "esporte", "pages"]);
+  it("mantém o catálogo público com um produto ativo e CTA utilizável", () => {
+    expect(products.map((product) => product.id)).toEqual(["deliveries"]);
     expect(new Set(products.map((product) => product.number)).size).toBe(products.length);
     expect(products.every((product) => product.ctaHref.startsWith("/") || product.ctaHref.startsWith("http"))).toBe(true);
     expect(products[0].name).toBe("Hudi Delivery");
-    expect(products.slice(1).every((product) => product.launchLabel === "Outubro de 2026")).toBe(true);
   });
 
   it("expõe capacidades técnicas sem duplicidade", () => {

@@ -106,13 +106,11 @@ summary:focus-visible {
   .kinetic-halo--outer { width: 390px; height: 390px; }.kinetic-halo--inner { width: 290px; height: 290px; }
   .kinetic-caption { display: none; }
   .product-cta { min-height: 62px; border-radius: 14px; padding-left: 18px; }.product-cta svg { width: 40px; height: 40px; }
-  .pages-workspace { grid-template-columns: 62px 1fr; }.pages-canvas { padding: 22px 17px; }.pages-canvas strong { font-size: 1.24rem; }
   .integration-teaser__grid { gap: 46px; }.integration-flow { min-height: 350px; padding: 32px 20px; }.integration-node { font-size: .7rem; }
   .inner-hero { min-height: 450px; }.inner-hero__content { padding: 78px 0; }.inner-hero h1 { font-size: clamp(2.75rem,13vw,4.4rem); }
-  .product-catalog__grid, .integration-story__grid, .launch-board__grid { grid-template-columns: 1fr; }
+  .product-catalog__grid, .integration-story__grid { grid-template-columns: 1fr; }
   .catalog-card:last-child { grid-column: auto; }.catalog-card { min-height: 470px; padding: 24px; }
   .integration-orbit { display: none; }.integration-story__grid { margin-top: 38px; }.integration-story__grid article { min-height: 220px; }
-  .launch-card { min-height: 540px; padding: 26px; }.launch-card__date { margin-bottom: 50px; }
   .back-to-top { right: 16px; bottom: 16px; }
 }
 

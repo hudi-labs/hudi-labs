@@ -7,7 +7,7 @@
 | `tests/home.test.tsx` | Integração de UI | A landing renderiza a proposta institucional, os CTAs principais e o estado de interação do hero conforme o cursor entra e sai. |
 | `tests/brandbook.test.tsx` | Integração de rota | O Brand Book tem página própria e suas navegações institucionais voltam corretamente à home. |
 | `tests/site-content.test.ts` | Unitário | Produtos e capacidades possuem IDs únicos, CTAs utilizáveis e conteúdo sem duplicidade. |
-| `tests/components.test.tsx` | Integração de componentes | Estados de lançamento, CTAs, capacidades técnicas e navegação de contexto mobile/Brand Book. |
+| `tests/components.test.tsx` | Integração de componentes | CTA do produto público, capacidades técnicas e navegação de contexto mobile/Brand Book. |
 | `scripts/verify-static-output.mjs` | Verificação de build | O export contém `index.html` e `brandbook/index.html`, com conteúdo crítico, link correto para a rota do Brand Book e sem referências a `localhost`. |
 
 ## Portões de qualidade

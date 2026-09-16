@@ -1,5 +1,4 @@
-export type ProductStatus = "available" | "coming-soon";
-export type ProductId = "deliveries" | "esporte" | "pages";
+export type ProductId = "deliveries";
 
 export type Product = {
   id: ProductId;
@@ -12,8 +11,6 @@ export type Product = {
   highlights: string[];
   ctaLabel: string;
   ctaHref: string;
-  status: ProductStatus;
-  launchLabel?: string;
 };
 
 export type Capability = {

@@ -94,7 +94,7 @@ export function Hero() {
           </ul>
         </div>
 
-        <div className="hero-stage" aria-label="Hudi Labs, Hudi Delivery, Hudi Esporte e Hudi Pages">
+        <div className="hero-stage" aria-label="Hudi Labs e Hudi Delivery">
           <div className="kinetic-wordmark">
             <span className="kinetic-mark" aria-hidden="true"><i /></span>
             <strong>HUDI</strong>
@@ -102,8 +102,8 @@ export function Hero() {
               <div className="kinetic-wheel__track">
                 <span>LABS</span>
                 <span>DELIVERY</span>
-                <span>ESPORTE</span>
-                <span>PAGES</span>
+                <span>PRODUTOS</span>
+                <span>TECNOLOGIA</span>
                 <span>LABS</span>
               </div>
             </div>

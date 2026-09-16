@@ -8,20 +8,20 @@ O projeto é uma aplicação Next.js com export estático. Não depende de servi
 
 | Rota | Finalidade |
 | --- | --- |
-| `/` | Landing page da Hudi Labs, seu manifesto, ecossistema de produtos e capacidades técnicas. |
+| `/` | Landing page da Hudi Labs, seu manifesto, catálogo de produtos e capacidades técnicas. |
+| `/produtos/` | Catálogo público dos produtos ativos da Hudi Labs. |
+| `/integracoes/` | Visão institucional das capacidades técnicas e de integração. |
 | `/brandbook/` | Manual independente da marca, com propósito, voz, logo, paleta e diretrizes de UI. |
 
-A navegação é bidirecional: o cabeçalho e rodapé da landing levam ao Brand Book; o Brand Book retorna às seções correspondentes da home.
+A navegação é bidirecional: o cabeçalho e rodapé da landing levam às rotas principais; o Brand Book retorna às seções correspondentes da home.
 
 ## Estratégia de produto e design
 
-O site assume a Hudi Labs como marca-mãe e usa a convenção **Hudi + categoria** para o ecossistema:
+O site assume a Hudi Labs como marca-mãe e apresenta o produto público atualmente ativo:
 
-- **Hudi Deliveries** — gestão e automação de operações de delivery;
-- **Hudi Esporte** — conexão entre jogadores, times e partidas;
-- **Hudi Pages** — criação de landing pages rápidas e focadas em conversão.
+- **Hudi Delivery** — gestão e automação de operações de delivery.
 
-O sistema visual preserva a identidade original: Inter, azul profundo, azul Hudi, off-white, estrutura geométrica de cantos retos e glassmorphism contido. O hero usa um mapa orbital do ecossistema como assinatura visual: uma base Hudi no centro e os produtos como extensões da mesma arquitetura.
+O sistema visual preserva a identidade original: Inter, azul profundo, azul Hudi, off-white, estrutura geométrica de cantos retos e glassmorphism contido. O hero usa uma assinatura cinética da marca para reforçar a relação entre laboratório, tecnologia e produto.
 
 ## Tecnologia
 
@@ -47,7 +47,7 @@ npm run build
 npm run verify:export
 ```
 
-O export é gerado em `out/` e contém tanto a home quanto `/brandbook/`.
+O export é gerado em `out/` e contém a home, o catálogo de produtos, a página de integrações e `/brandbook/`.
 
 ## Scripts
 
@@ -68,6 +68,8 @@ Veja os contratos e cenários em [docs/QUALITY.md](docs/QUALITY.md).
 src/
   app/
     page.tsx                 # composição da landing
+    produtos/page.tsx        # catálogo público dos produtos ativos
+    integracoes/page.tsx     # capacidades técnicas e integrações
     brandbook/page.tsx       # rota separada do manual de marca
     globals.css              # tokens e estilos responsivos
   components/
@@ -81,7 +83,7 @@ tests/                       # testes unitários e de integração
 docs/                        # qualidade e deploy
 ```
 
-Dados operacionais editáveis — produtos, CTAs, status de lançamento, capacidades, navegação e contato — ficam em [`src/data/site-content.ts`](src/data/site-content.ts). A copy institucional e as diretrizes de marca ficam propositalmente co-localizadas em seus componentes de seção e no `BrandbookManual`.
+Dados operacionais editáveis — produtos, CTAs, capacidades, navegação e contato — ficam em [`src/data/site-content.ts`](src/data/site-content.ts). A copy institucional e as diretrizes de marca ficam propositalmente co-localizadas em seus componentes de seção e no `BrandbookManual`.
 
 ## Documentação de componentes
 
@@ -94,7 +96,7 @@ Cada componente público possui seu próprio README, com finalidade, exemplos de
 | [SiteFooter](src/components/layout/SiteFooter/README.md) | Navegação, contatos e vínculo persistente com o Brand Book. |
 | [Hero](src/components/sections/Hero/README.md) | Proposta de valor e caminhos principais de conversão. |
 | [Manifesto](src/components/sections/Manifesto/README.md) | Narrativa institucional da empresa-mãe. |
-| [ProductShowcase](src/components/sections/ProductShowcase/README.md) | Bloco reutilizável em zigue-zague para cada produto. |
+| [ProductShowcase](src/components/sections/ProductShowcase/README.md) | Bloco reutilizável para o produto público apresentado na landing. |
 | [TechnologyGrid](src/components/sections/TechnologyGrid/README.md) | Grade de capacidades técnicas e integrações. |
 | [FinalCta](src/components/sections/FinalCta/README.md) | Conversão de encerramento da página. |
 | [BrandbookManual](src/components/brandbook/BrandbookManual/README.md) | Manual de marca estruturado como módulo próprio. |
@@ -121,6 +123,6 @@ Siga [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) para ativar o Pages pela primeira 
 ## Acessibilidade e responsividade
 
 - HTML semântico, rótulos de regiões e navegação com nomes acessíveis;
-- CTAs são links reais para âncoras ou rotas estáticas;
+- CTAs são links reais para âncoras, rotas estáticas ou destinos externos explícitos;
 - mockups são decorativos e não adicionam controles focáveis;
 - layout validado em desktop e largura mobile de 390px.

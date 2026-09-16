@@ -17,8 +17,8 @@ export default function ProductsPage() {
         <section className="inner-hero inner-hero--products" aria-labelledby="products-title">
           <div className="container inner-hero__content">
             <p className="eyebrow eyebrow--light">Catálogo Hudi</p>
-            <h1 id="products-title">Produtos independentes. Uma mesma base de inovação.</h1>
-            <p>Uma visão direta do ecossistema. Cada produto tem identidade e jornada próprias, com a Hudi Labs conectando estratégia, engenharia e experiência.</p>
+            <h1 id="products-title">Produtos claros, úteis e prontos para escalar.</h1>
+            <p>Hoje, o catálogo público da Hudi Labs concentra o que já está ativo, com foco em produto real, operação consistente e evolução contínua.</p>
           </div>
         </section>
         <section className="section product-catalog" aria-label="Catálogo de produtos Hudi">
@@ -27,14 +27,14 @@ export default function ProductsPage() {
               <article className={`catalog-card catalog-card--${product.id}`} key={product.id}>
                 <div className="catalog-card__top">
                   <span>{product.number}</span>
-                  <b data-status={product.status}>{product.status === "available" ? "Disponível" : product.launchLabel}</b>
+                  <b>Disponível</b>
                 </div>
                 <div className="catalog-card__mark" aria-hidden="true"><i /></div>
                 <p className="eyebrow">{product.name}</p>
                 <h2>{product.headline}</h2>
                 <p>{product.summary}</p>
                 <Link className="catalog-card__link" href={product.ctaHref}>
-                  {product.status === "available" ? "Visitar produto" : "Ver lançamento"}
+                  Visitar produto
                   <span aria-hidden="true">→</span>
                 </Link>
               </article>
